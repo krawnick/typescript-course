@@ -1,4 +1,13 @@
-const str = 'str'
+// let userName: string = 'Nikita'
 
-// Компиляция в index.js tsc ./test/index.ts
-console.log(str)
+// userName = 123
+
+const isBirthday: boolean = true
+let age: number
+const useName: string = 'Nikita'
+
+age = 28
+
+if (isBirthday) {
+  console.log(`Congrats ${useName}, age: ${age + 1}`)
+}
