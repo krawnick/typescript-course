@@ -1,13 +1,21 @@
-// let userName: string = 'Nikita'
+const isBirthdayData: boolean = true
+let ageData: number = 28
+const userNameData: string = 'Nikita'
 
-// userName = 123
+// function logBrtMsg(isBirthday: boolean, userName: string, age: number): string {
+//   return isBirthday
+//     ? `Congrats ${userName.toUpperCase()}, age: ${age + 1}`
+//     : 'Error!'
+// }
 
-const isBirthday: boolean = true
-let age: number
-const useName: string = 'Nikita'
-
-age = 28
-
-if (isBirthday) {
-  console.log(`Congrats ${useName}, age: ${age + 1}`)
+const logBrtMsg = (
+  isBirthday: boolean,
+  userName: string,
+  age: number
+): string => {
+  return isBirthday
+    ? `Congrats ${userName.toUpperCase()}, age: ${age + 1}`
+    : 'Error!'
 }
+
+console.log(logBrtMsg(isBirthdayData, userNameData, ageData))
