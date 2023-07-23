@@ -1,19 +1,18 @@
-const isBirthdayData: boolean = false
-let ageData: number = 28
-const userNameData: string = 'Nikita'
+const test: null = null
+const test2: any = null
 
-const createError = (message: string): never => {
-  console.error(message)
-  throw new Error(message)
-}
+const test3: undefined = undefined
+const test4: any = undefined
 
-function logBrtMsg(isBirthday: boolean, userName: string, age: number): string {
-  if (isBirthday === true) {
-    return `Congrats ${userName.toUpperCase()}, age: ${age + 1}`
-  } else if (isBirthday === false) {
-    return 'Too bad'
+let smth //any
+
+const getRndmNum = () => {
+  if (Math.random() > 0.5) {
+    return null
+  } else {
+    return '   Some data   '
   }
-  return createError('Error!')
 }
 
-logBrtMsg(isBirthdayData, userNameData, ageData)
+const data = getRndmNum()
+const trimmedData = data ? data.trim() : null
