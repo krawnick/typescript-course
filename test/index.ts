@@ -1,18 +1,12 @@
-const test: null = null
-const test2: any = null
+let id: symbol = Symbol('id')
 
-const test3: undefined = undefined
-const test4: any = undefined
-
-let smth //any
-
-const getRndmNum = () => {
-  if (Math.random() > 0.5) {
-    return null
-  } else {
-    return '   Some data   '
-  }
+const data = {
+  [id]: 1,
 }
 
-const data = getRndmNum()
-const trimmedData = data ? data.trim() : null
+console.log(data[id])
+
+const num1: bigint = 1n
+const num2: bigint = 2n
+
+console.log(num1 + num2)
