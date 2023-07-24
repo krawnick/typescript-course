@@ -37,18 +37,3 @@ function logBrtMsg({
 }
 
 console.log(logBrtMsg(userData))
-
-const departments: string[] = ['dev', 'design', 'marketing']
-const nums: number[][] = [
-  [1, 2, 3],
-  [4, 5, 6],
-]
-
-const report = departments
-  .filter((department: string) => department !== 'dev')
-  .map((department: string) => `${department} - done`)
-
-console.log(report)
-
-const [first] = report
-console.log(first)
