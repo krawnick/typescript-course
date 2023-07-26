@@ -16,16 +16,6 @@ const userData = {
   },
 }
 
-const userDataTuple: [boolean, number, ...string[]] = [
-  true,
-  28,
-  'Nikita',
-  'Anna',
-]
-userDataTuple.push(50)
-// userDataTuple[3]
-console.log(typeof userDataTuple[4])
-
 function logBrtMsg({
   isBirthdayData,
   ageData,
