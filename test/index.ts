@@ -5,9 +5,21 @@
 
 type AnimationTimingFunc = 'ease' | 'ease-out' | 'ease-in'
 type AnimationId = string | number
-type Config = { protocol: 'http' | 'https'; port: 3000 | 3001 }
-type Role = { role: string }
-type ConfigWitchRole = Config & Role
+// type Config = { protocol: 'http' | 'https'; port: 3000 | 3001 }
+// type Role = { role: string }
+// type ConfigWitchRole = Config & Role
+
+interface Config {
+  protocol: 'http' | 'https'
+  port: 3000 | 3001
+  log: (msg: string) => void
+}
+
+interface Role {
+  role: string
+}
+
+interface ConfigWithRole extends Config, Role {}
 
 // const serverConfig: Config = {
 //   protocol: 'https',
@@ -19,32 +31,35 @@ type ConfigWitchRole = Config & Role
 //   port: 3000,
 // }
 
-const serverConfig: ConfigWitchRole = {
+const serverConfig: ConfigWithRole = {
   protocol: 'https',
   port: 3001,
   role: 'admin',
+  log: (msg: string): void => console.log(msg),
 }
 
-const backupConfig: ConfigWitchRole = {
-  protocol: 'http',
-  port: 3000,
-  role: 'sysadmin'
-}
+// const backupConfig: ConfigWitchRole = {
+//   protocol: 'http',
+//   port: 3000,
+//   role: 'sysadmin'
+// }
 
-type StartFunction = (protocol: 'http' | 'https', port: 3000 | 3001) => string
-
-const startServer: StartFunction  = (
+type StartFunction = (
   protocol: 'http' | 'https',
-  port: 3000 | 3001
-): 'Server started' => {
-  console.log(`Server started on ${protocol}://server:${port}`)
+  port: 3000 | 3001,
+  log: (msg: string) => void
+) => string
 
+const startServer: StartFunction = (
+  protocol: 'http' | 'https',
+  port: 3000 | 3001,
+  log: (msg: string) => void
+): 'Server started' => {
   return 'Server started'
 }
 
 // startServer('https', 3001)
-startServer(serverConfig.protocol, serverConfig.port)
-
+startServer(serverConfig.protocol, serverConfig.port, serverConfig.log)
 
 function createAnimation(
   id: AnimationId,
@@ -62,3 +77,15 @@ function createAnimation(
 }
 
 createAnimation('12ndj232', 'scale', 'ease', 1, 1)
+
+// Индексные свойства
+
+interface Styles {
+  [key: string]: string
+}
+
+const styles: Styles = {
+  position: 'absolute',
+  top: '20px',
+  left: '50px',
+}
