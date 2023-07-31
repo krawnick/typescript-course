@@ -3,12 +3,37 @@
 // const port3000: number = 3000
 // const port3001: number = 3001
 
-const serverConfig: { protocol: 'http' | 'https'; port: 3000 | 3001 } = {
+type AnimationTimingFunc = 'ease' | 'ease-out' | 'ease-in'
+type AnimationId = string | number
+type Config = { protocol: 'http' | 'https'; port: 3000 | 3001 }
+type Role = { role: string }
+type ConfigWitchRole = Config & Role
+
+// const serverConfig: Config = {
+//   protocol: 'https',
+//   port: 3001,
+// }
+
+// const backupConfig: Config = {
+//   protocol: 'http',
+//   port: 3000,
+// }
+
+const serverConfig: ConfigWitchRole = {
   protocol: 'https',
   port: 3001,
+  role: 'admin',
 }
 
-const startServer: (protocol: 'http' | 'https', port: 3000 | 3001) => string = (
+const backupConfig: ConfigWitchRole = {
+  protocol: 'http',
+  port: 3000,
+  role: 'sysadmin'
+}
+
+type StartFunction = (protocol: 'http' | 'https', port: 3000 | 3001) => string
+
+const startServer: StartFunction  = (
   protocol: 'http' | 'https',
   port: 3000 | 3001
 ): 'Server started' => {
@@ -20,8 +45,6 @@ const startServer: (protocol: 'http' | 'https', port: 3000 | 3001) => string = (
 // startServer('https', 3001)
 startServer(serverConfig.protocol, serverConfig.port)
 
-type AnimationTimingFunc = 'ease' | 'ease-out' | 'ease-in'
-type AnimationId = string | number
 
 function createAnimation(
   id: AnimationId,
