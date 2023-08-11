@@ -2,7 +2,7 @@
 
 interface User {
   login: string
-  passwort: string
+  password: string
   age: number
   addr?: string
   parents?: {
@@ -13,13 +13,30 @@ interface User {
 
 const user213: User = {
   login: 'krawnick',
-  passwort: '1234',
+  password: '1234',
   age: 28,
   addr: 'Uspenskiy 18',
+  parents: {
+    mother: 'Irina',
+    father: 'Ivan',
+  },
 }
 
-const dbName = 'string'
+// const dbName = 'string'
+
+// function sendUserData(obj: User, db?: string): void {
+//   console.log(obj.parents?.father?.toLowerCase(), db?.toLowerCase())
+// }
+
+// Отлючение проверки свойства "!" (Оператор Not-Null Not-Undefined)
+
+let dbName: string
+
+sendUserData(user213, 'string')
+
+console.log(dbName!)
 
 function sendUserData(obj: User, db?: string): void {
-  console.log(obj.parents?.father?.toLowerCase(), db?.toLowerCase())
+  dbName = 'string'
+  console.log(obj.parents!.father?.toLowerCase(), db!.toLowerCase())
 }
