@@ -1,7 +1,7 @@
 // Модификатор optional
 
 interface User {
-  login: string
+  readonly login: string
   password: string
   age: number
   addr?: string
@@ -22,6 +22,16 @@ const user213: User = {
   },
 }
 
+// user213.login = 'Ivan'
+
+const userFreeze: Readonly<User> = {
+  login: 'First',
+  password: 'qwerty',
+  age: 25,
+}
+
+// userFreeze.age = 50
+
 // const dbName = 'string'
 
 // function sendUserData(obj: User, db?: string): void {
@@ -40,3 +50,13 @@ function sendUserData(obj: User, db?: string): void {
   dbName = 'string'
   console.log(obj.parents!.father?.toLowerCase(), db!.toLowerCase())
 }
+
+const basicPorts: ReadonlyArray<number> = [3000, 3001, 5555]
+// const basicPorts: readonly number[] = [3000, 3001, 5555]
+
+// basicPorts[0] = 3002
+// basicPorts.push(3003)
+
+const otherPorts: readonly [number, ...string[]] = [3000, '3001', '5555']
+// otherPorts[0] = 3002
+// otherPorts.push(3003)
