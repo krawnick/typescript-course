@@ -1,21 +1,18 @@
-const dataFromControl = {
-  water: 200,
-  el: 350,
+const fetchData = (url: string, method: 'GET' | 'POST'): void => {
+  console.log('Fetched')
 }
 
-function checkReadings(data: typeof dataFromControl): boolean {
-  const dataFromUser = {
-    water: 200,
-    el: 350,
+const reqOpt =
+  // : {
+  //   url: string
+  //   method: 'GET' | 'POST'
+  // }
+  {
+    url: 'https://someurl.com',
+    method: 'GET',
   }
-  if (data.el === dataFromUser.el && data.water === dataFromUser.water) {
-    return true
-  }
-  return false
-}
-console.log(checkReadings(dataFromControl))
 
-const PI = 3.14
-let PIClone: typeof PI
-PIClone = PI || 3.14
-console.log(PIClone)
+fetchData('qqq', 'GET')
+fetchData(reqOpt.url, reqOpt.method as 'GET')
+
+// 9:55
