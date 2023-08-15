@@ -1,52 +1,44 @@
-const fetchData = (url: string, method: 'GET' | 'POST'): void => {
-  console.log('Fetched')
+// let num: Number = new Number(5)
+// let num2: number = 5
+// let num3: number = Number(5)
+
+// console.log(num == num2, num === num2, num, num2)
+// console.log(typeof num)
+// console.log(typeof num3)
+
+// num = num2
+
+const num = 5
+const strNum: string = num.toString()
+const str = '5'
+const numStr: number = +str
+
+interface Department {
+  name: string
+  budget: number
 }
 
-// const reqOpt =
-// : {
-//   url: string
-//   method: 'GET' | 'POST'
-// }
-// {
-//   url: 'https://someurl.com',
-//   method: 'GET' as 'GET',
-// }
-
-// const reqOpt = {
-//   url: 'https://someurl.com',
-//   method: 'GET',
-// } as const
-
-const reqOpt = {
-  url: 'https://someurl.com',
-  method: 'GET',
+const department: Department = {
+  name: 'web-dev',
+  budget: 50000,
 }
 
-fetchData('qqq', 'GET')
-// fetchData(reqOpt.url, reqOpt.method as 'GET')
-// fetchData(reqOpt.url, reqOpt.method)
-fetchData(reqOpt.url, <'GET'>reqOpt.method)
+interface Project {
+  name: string
+  projectBudjet: number
+}
 
-const box = document.querySelector('.box') as HTMLElement
-const input = document.querySelector('input') as HTMLInputElement
-console.log(input)
+// const mainProject: Project = {
+//   ...department,
+//   projectBudjet: 5000,
+// }
 
-// const someNumber: number = +input.value as any as number
-const someNumber: number = +input.value
-console.log(someNumber)
-// box.style
-// box?.classList
-// console.log(box)
+function tranformDepartment(department: Department, amount: number): Project {
+  return {
+    name: department.name,
+    projectBudjet: amount,
+  }
+}
 
-let a = 'value' as const
-
-let b = { f: 100 } as const
-let c = [] as const
-
-let value = 'value'
-let arr = ['sf', 'asdf']
-let obj = { f: 100 }
-
-// let T0 = value as const
-
-let q = Math.round(Math.random() * 1) ? 'yes' : ('no' as const)
+const mainProject = tranformDepartment(department, 4000)
+console.log(mainProject)
