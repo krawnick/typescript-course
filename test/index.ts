@@ -1,44 +1,58 @@
-// let num: Number = new Number(5)
-// let num2: number = 5
-// let num3: number = Number(5)
-
-// console.log(num == num2, num === num2, num, num2)
-// console.log(typeof num)
-// console.log(typeof num3)
-
-// num = num2
-
-const num = 5
-const strNum: string = num.toString()
-const str = '5'
-const numStr: number = +str
-
-interface Department {
-  name: string
-  budget: number
+function printMsg(msg: string[] | number | boolean): void {
+  if (Array.isArray(msg)) {
+    msg.forEach((m) => console.log(m))
+  } else if (isNumber(msg)) {
+    console.log(msg)
+  } else {
+    console.log(msg)
+  }
+  console.log(msg)
 }
 
-const department: Department = {
-  name: 'web-dev',
-  budget: 50000,
-}
+printMsg(4)
 
-interface Project {
-  name: string
-  projectBudjet: number
-}
+const box = document.querySelector('.box')
+box?.addEventListener('click', function () {})
 
-// const mainProject: Project = {
-//   ...department,
-//   projectBudjet: 5000,
+// function isNumber(n: string[] | number | boolean): n is number {
+//   return typeof n === 'number'
 // }
 
-function tranformDepartment(department: Department, amount: number): Project {
-  return {
-    name: department.name,
-    projectBudjet: amount,
+function isNumber(n: unknown): n is number {
+  return typeof n === 'number'
+}
+
+interface Car {
+  engine: string
+  wheels: {
+    number: number
+    type: string
   }
 }
 
-const mainProject = tranformDepartment(department, 4000)
-console.log(mainProject)
+interface Ship {
+  engine: string
+  sail: string
+}
+
+function repairVechile(vehicle: Car | Ship) {
+  if (isCar(vehicle)) {
+    vehicle.wheels
+  } else if (isShip(vehicle)) {
+    vehicle.sail
+  } else {
+    vehicle
+  }
+}
+
+// function isCar(car: Car | Ship): car is Car {
+//   return 'wheels' in car
+// }
+
+function isCar(car: Car | Ship): car is Car {
+  return (car as Car).wheels.number !== undefined
+}
+
+function isShip(ship: Car | Ship): ship is Ship {
+  return 'sail' in ship
+}
