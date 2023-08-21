@@ -1,10 +1,30 @@
 const formData = {
-	email: "",
-	title: "",
-	text: "",
-	checkbox: false,
+  email: "",
+  title: "",
+  text: "",
+  checkbox: false
 };
 
+const input = document.querySelectorAll(".form-control");
+console.log(input);
+function checkInput(input) {
+  console.log(
+    input.forEach((el) => {
+      console.log(el.value);
+    })
+  );
+  // if (input.every((el) => !el.value)) {
+  //   alert("Не все поля заполнены");
+  // }
+}
+
+const form = document.querySelectorAll("form");
+form.forEach((el) => {
+  el.addEventListener("submit", (e) => {
+    checkInput(input);
+    e.preventDefault();
+  });
+});
 // Последовательность действий:
 // 1) Происходит submit любой из форм
 // 2) Все данные из 4х полей со страницы переходят в свойства объекта formData
@@ -12,23 +32,23 @@ const formData = {
 // 4) Если на предыдущем этапе true, то запускается функция checkFormData с этим объектом
 
 function validateFormData(data) {
-	// Если каждое из свойств объекта data правдиво...
-	if ("condition") {
-		return true;
-	} else {
-		console.log("Please, complete all fields");
-		return false;
-	}
+  // Если каждое из свойств объекта data правдиво...
+  if ("condition") {
+    return true;
+  } else {
+    console.log("Please, complete all fields");
+    return false;
+  }
 }
 
 function checkFormData(data) {
-	const { email } = data;
-	const emails = ["example@gmail.com", "example@ex.com", "admin@gmail.com"];
+  const { email } = data;
+  const emails = ["example@gmail.com", "example@ex.com", "admin@gmail.com"];
 
-	// Если email совпадает хотя бы с одним из массива
-	if ("condition") {
-		console.log("This email is already exist");
-	} else {
-		console.log("Posting data...");
-	}
+  // Если email совпадает хотя бы с одним из массива
+  if ("condition") {
+    console.log("This email is already exist");
+  } else {
+    console.log("Posting data...");
+  }
 }
