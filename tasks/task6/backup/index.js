@@ -1,22 +1,17 @@
 const forms = document.querySelectorAll('form')
-const email = document.querySelector('#email') as HTMLInputElement
-const title = document.querySelector('#title') as HTMLInputElement
-const text = document.querySelector('#text') as HTMLTextAreaElement
-const checkbox = document.querySelector('#checkbox') as HTMLInputElement
+const email = document.querySelector('#email')
+const title = document.querySelector('#title')
+const text = document.querySelector('#text')
+const checkbox = document.querySelector('#checkbox')
 
-interface IFormData {
-  email: string
-  title: string
-  text: string
-  checkbox: boolean
-}
-
-const formData: IFormData = {
+const formData = {
   email: '',
   title: '',
   text: '',
   checkbox: false,
 }
+
+console.log(Object.values(formData).every((el) => el))
 
 forms.forEach((form) => {
   form.addEventListener('submit', (e) => {
@@ -40,7 +35,7 @@ forms.forEach((form) => {
 // 3) Запускается функция validateFormData с этим объектом, возвращает true/false
 // 4) Если на предыдущем этапе true, то запускается функция checkFormData с этим объектом
 
-function validateFormData(data: IFormData): boolean {
+function validateFormData(data) {
   // Если каждое из свойств объекта data правдиво...
   if (Object.values(data).every((value) => value)) {
     console.log('All fields are completed!')
@@ -51,13 +46,9 @@ function validateFormData(data: IFormData): boolean {
   }
 }
 
-function checkFormData(data: IFormData): void {
+function checkFormData(data) {
   const { email } = data
-  const emails: string[] = [
-    'example@gmail.com',
-    'example@ex.com',
-    'admin@gmail.com',
-  ]
+  const emails = ['example@gmail.com', 'example@ex.com', 'admin@gmail.com']
   console.log(email)
 
   // Если email совпадает хотя бы с одним из массива
