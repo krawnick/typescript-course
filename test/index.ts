@@ -1,27 +1,56 @@
-function proccesingData<T>(data: T): T {
-  // ...
+function proccesingData<T, S>(data: T, option: S): string {
+  switch (typeof data) {
+    case 'string':
+      return `${data}, speed: ${option}`
+      break
+    case 'number': {
+      return `${data.toFixed()}, speed: ${option}`
+    }
+    default:
+      return 'Not valid'
+  }
+}
+
+const res1 = proccesingData(1, 'fast')
+const res2 = proccesingData('string', 'slow')
+const res3 = proccesingData<number, string>(10, 'abc')
+
+console.log(res1)
+console.log(res2)
+console.log(res3)
+
+function proccesing<T>(data: T): T {
   return data
 }
 
-const res1 = proccesingData(1)
-const res2 = proccesingData('string')
-
-const num = 10
-
-// const res3 = proccesingData<number>('ae')
-const res3 = proccesingData<number>(num)
-
-interface PrintFR {
-  design: number
+interface ProccesingFn {
+  <T>(data: T): T
 }
 
-interface PrinrES {
-  design: string
+// let newFunc: <T>(data: T) => T = proccesing
+let newFunc: ProccesingFn = proccesing
+
+// interface DataSaver {
+//   proccesing: <T>(data: T) => T
+// }
+
+interface DataSaver {
+  proccesing: typeof proccesing
 }
 
-interface Print<T> {
-  design: T
-}
+const saver: DataSaver = {
+  // proccesing(data) {
+  //   console.log(data)
+  //   return data
+  // }
 
-const somePrint: Print<string> = { design: 'ten' }
-const someOtherPrint: Print<number> = { design: 1 }
+  //   proccesing: <T>(data: T) => {
+  //     return data
+  //   }
+
+  // proccesing: (data) => {
+  //   return data
+  // },
+
+  proccesing: proccesing,
+}
