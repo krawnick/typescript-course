@@ -1,56 +1,70 @@
-function proccesingData<T, S>(data: T, option: S): string {
-  switch (typeof data) {
-    case 'string':
-      return `${data}, speed: ${option}`
-      break
-    case 'number': {
-      return `${data.toFixed()}, speed: ${option}`
-    }
-    default:
-      return 'Not valid'
-  }
+interface ProccesingFn {
+  <T>(data: T): T
 }
-
-const res1 = proccesingData(1, 'fast')
-const res2 = proccesingData('string', 'slow')
-const res3 = proccesingData<number, string>(10, 'abc')
-
-console.log(res1)
-console.log(res2)
-console.log(res3)
 
 function proccesing<T>(data: T): T {
   return data
 }
 
-interface ProccesingFn {
-  <T>(data: T): T
-}
-
-// let newFunc: <T>(data: T) => T = proccesing
 let newFunc: ProccesingFn = proccesing
 
-// interface DataSaver {
-//   proccesing: <T>(data: T) => T
+console.log(newFunc(10))
+
+type Smth<T> = T
+
+const num: Smth<number> = 5
+
+// type User<T> = {
+//     login: T,
+//     age: number,
 // }
 
-interface DataSaver {
-  proccesing: typeof proccesing
+interface ParentsOfUser {
+  mother: string
+  father: string
 }
 
-const saver: DataSaver = {
-  // proccesing(data) {
-  //   console.log(data)
-  //   return data
-  // }
-
-  //   proccesing: <T>(data: T) => {
-  //     return data
-  //   }
-
-  // proccesing: (data) => {
-  //   return data
-  // },
-
-  proccesing: proccesing,
+interface User<ParentsData extends ParentsOfUser> {
+  login: string
+  age: number
+  parents: ParentsData
 }
+
+const user: User<{ mother: string; father: string; married: boolean }> = {
+  login: 'krawnick',
+  age: 28,
+  parents: {
+    mother: 'Irina',
+    father: 'Ivan',
+    married: true,
+  },
+}
+
+// const user2: User<string> = {
+//     login: 'krawnick',
+//     age: 28,
+//     parents: ''
+//     }
+
+type OrNull<Type> = Type | null
+
+const orNull: OrNull<string> = 'Not Null'
+const orNullTwo: OrNull<string> = null
+
+type OneOrMany<Type> = Type | Type[]
+
+const data: OneOrMany<number> = [5, 5, 5]
+
+const depositMoney = <T extends number | string>(amount: T): T => {
+  console.log(`req to server with amount: ${amount}`)
+  return amount
+}
+
+//  const depositMoney = (amount: number | string): number | string => {
+//     console.log(`req to server with amount: ${amount}`)
+//     return amount
+// }
+
+depositMoney(400)
+depositMoney('400')
+// depositMoney(false)
