@@ -5,7 +5,7 @@ interface ICompany {
 
 type CompanyKeys = keyof ICompany
 
-const keys: CompanyKeys = 'name'
+// const keys: CompanyKeys = 'name'
 
 function printDebts<T, K extends keyof T, S extends keyof T>(
   company: T,
@@ -28,3 +28,6 @@ const google = {
 }
 
 printDebts(google, 'name', 'open')
+
+type GoogleKeys = keyof typeof google
+const keys: GoogleKeys = 'name'
