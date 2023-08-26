@@ -1,0 +1,57 @@
+.button {
+  /* padding: 9px 54px; */
+  height: 40px;
+  width: 158px;
+  margin: 10px;
+
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 22px;
+  letter-spacing: 0.75px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+}
+
+.buttonDisable {
+  color: var(--light-gray-light);
+  background-color: var(--light-gray);
+
+  cursor: no-drop;
+}
+
+.buttonDisableSecondary {
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  opacity: 0.5;
+
+  cursor: no-drop;
+}
+
+.buttonIcon,
+.buttonPrimary {
+  color: var(--light-gray-light);
+  background-color: var(--primary);
+}
+.buttonIcon:hover,
+.buttonPrimary:hover {
+  background-color: var(--tertiary);
+}
+
+.buttonSecondary {
+  color: var(--primary);
+  background-color: var(--light-gray-light);
+}
+.buttonSecondary:hover {
+  color: var(--primary);
+  background-color: var(--secondary);
+}
+
+.buttonShop {
+  color: var(--light-gray-light);
+  background-color: #ffb31f;
+}
+.buttonShop:hover {
+  background-color: #cf8900;
+}

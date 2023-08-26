@@ -1,0 +1,33 @@
+.l {
+	font-size: 24px;
+	font-weight: 400;
+	line-height: 38px;
+}
+
+.m {
+	font-size: 18px;
+	font-weight: 400;
+	line-height: 34px;
+}
+
+.s {
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 28px;
+}
+
+.xs {
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 22px;
+}
+
+.tinny {
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 18px;
+}
+
+.bold {
+	font-weight: 700;
+}
