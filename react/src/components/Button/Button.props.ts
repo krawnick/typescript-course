@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from 'react'
 
 export enum Appearance {
   Disable = 'disable',
@@ -9,7 +9,11 @@ export enum Appearance {
   Shop = 'shop',
 }
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLElement> {
+export interface ButtonProps
+  extends DetailedHTMLProps<
+    ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  > {
   children: ReactNode
   appearance: Appearance
 }
