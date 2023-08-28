@@ -1,11 +1,31 @@
 interface ICompany {
   name: string
   debts: number
+  departments: Department
+  management: {
+    owner: string
+  }
 }
 
-type CompanyKeys = keyof ICompany
+interface Department {
+  [key: string]: string
+}
 
-// const keys: CompanyKeys = 'name'
+// const debts = 'debts'
+let debts = 'debts' as 'debts'
+
+type CompanyDebtsType = ICompany[typeof debts]
+
+// type CompanyDebtsType = typeof ICompany.debts неверное получение типа
+// type CompanyDebtsType = ICompany['debts']
+type CompanyOwnerType = ICompany['management']['owner']
+type CompanyDepartmentsType = ICompany['departments'][number] // Получение одного интерфейса
+type CompanyDepartmentsTypes = ICompany['departments']
+
+type Test = ICompany[keyof ICompany]
+
+type CompanyKeys = keyof ICompany
+const keys: CompanyKeys = 'debts'
 
 function printDebts<T, K extends keyof T, S extends keyof T>(
   company: T,
@@ -15,19 +35,17 @@ function printDebts<T, K extends keyof T, S extends keyof T>(
   console.log(`company ${company[name]}, debts: ${company[debts]}`)
 }
 
-const hh: ICompany = {
-  name: 'HH',
-  debts: 50000,
-}
-
-printDebts(hh, 'name', 'debts')
-
-const google = {
+const google: ICompany = {
   name: 'google',
-  open: 'true',
+  debts: 50000,
+  departments: {
+    sales: 'sales',
+    developer: 'dev',
+  },
+  management: {
+    owner: 'John',
+  },
 }
-
-printDebts(google, 'name', 'open')
 
 type GoogleKeys = keyof typeof google
-const keys: GoogleKeys = 'name'
+const key: GoogleKeys = 'name'
