@@ -10,7 +10,7 @@ type Valid<T> = {
 // Учтите, что данные в форме могут расширяться и эти поля
 // должны появиться и в объекте валидации
 
-const validationData = {
+const validationData: Valid<IForm> = {
   login: { isValid: false, errorMsg: 'At least 3 characters' },
   password: { isValid: true },
 }
