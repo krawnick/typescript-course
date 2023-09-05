@@ -1,21 +1,49 @@
-function calculate(a: number, b: number): number {
+const jsonTest = '{"name": "test", "data": 4}'
 
-	return a * b
+interface JsonTest {
+  name: string
+  data: number
 }
 
-type CalculateRT = ReturnType<typeof calculate>
+const objFromJson: JsonTest = JSON.parse(jsonTest)
 
-let anotherResult: CalculateRT = 5
+// console.log(objFromJson)
 
-type calculatePT = Parameters<typeof calculate>
-type calculatePT0 = Parameters<typeof calculate>[0]
+let todoList: Todo[] = []
 
-type PT1 = Parameters<(a: number) => number>
-type PT2 = Parameters<<T>(arg: T) => T>
-
-class Example {
-	constructor(a: number)
-	{}
+interface Todo {
+  userId: number
+  id: number
+  title: string
+  completed: boolean
 }
 
-type T0 = ConstructorParameters<typeof Example>
+// fetch('https://jsonplaceholder.typicode.com/todos/1')
+// 	.then(response => response.json())
+// 	.then(json => {
+// 		if ('id' in json) {
+// 			todoList.push(json)
+// 		}
+// 		console.log(todoList)
+// 	})
+
+fetch('https://jsonplaceholder.typicode.com/todos')
+  .then((response) => response.json())
+  .then((json) => {
+    if ('id' in json) {
+      todoList.push(json)
+    } else if (Array.isArray(json)) {
+      todoList = json
+    } else {
+      console.log(`${json} - is a string`)
+    }
+    // console.log(todoList)
+  })
+
+const promise = new Promise<string>((resolve, reject) => {
+  resolve('test')
+})
+
+promise.then((value) => {
+  console.log(value.toUpperCase())
+})
