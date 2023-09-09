@@ -1,11 +1,10 @@
 class Box {
-  height: number
+  height: number = 500
   width: number
   volume: number | undefined
   _content: string | undefined
 
   constructor(width: number, volume?: number, content?: string) {
-    this.height = 500
     this.width = width
     this.volume = volume
     this._content = content
@@ -56,3 +55,18 @@ console.log(firstBox.checkBoxSize(270))
 
 // console.log(firstBox.content = 'test')
 // console.log(firstBox.content)
+
+class Styles {
+  [s: string]: string | ((s: string) => boolean)
+
+  method(b: unknown): boolean {
+    return !!b
+  }
+}
+
+const style = new Styles()
+
+style.color = 'white'
+style.font = 'Roboto'
+
+console.log(style.method(null))
