@@ -1,23 +1,42 @@
-interface IUser {
-  login: string
-  password: string
-  token?: number
-}
+class Player {
+  #login: string
+  private _password: string
+  public server: string // public по умолчанию
+  protected consent: boolean
 
-interface IValidation {
-  valid: boolean
-  isValid: (data: string) => boolean
-}
+  get password() {
+    return this._password
+  }
 
-class UserForm implements IUser, IValidation {
-  login: string
-  password: string
-  valid: boolean = false
-  token: number
-
-  isValid(login: string) {
-    return login.length > 3
+  set password(newPassword: string) {
+    // Validation
+    this._password = newPassword
   }
 }
 
-// new UserForm().token
+const test = new Player()
+
+class CompetitivePlayer extends Player {
+  rank: number
+
+  private isConsented() {
+    this.consent ? 'Yes' : 'No'
+  }
+}
+
+const player = new Player()
+player.password = 'asd'
+
+class User {
+  public email: string
+  public name: string
+
+  constructor(email: string, name: string) {
+    this.email = email
+    this.name = name
+  }
+}
+
+class UserTwo {
+  constructor(public email: string, public name: string) {}
+}
