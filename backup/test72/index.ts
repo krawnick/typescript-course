@@ -1,25 +1,8 @@
-function setName() {
-  return 'COD'
-}
-
 class Player {
-  private static game: string
-
   #login: string
   private _password: string
   public server: string // public по умолчанию
   protected consent: boolean
-
-  static {
-    Player.game = setName()
-  }
-
-  // constructor(game: string) {
-  // 	Player.game = game
-  // }
-
-  //   private constructor() {}
-  //   protected constructor() {}
 
   get password() {
     return this._password
@@ -29,11 +12,9 @@ class Player {
     // Validation
     this._password = newPassword
   }
-
-  static getGameName() {
-    return Player.game
-  }
 }
+
+const test = new Player()
 
 class CompetitivePlayer extends Player {
   rank: number
@@ -43,8 +24,8 @@ class CompetitivePlayer extends Player {
   }
 }
 
-new Player()
-console.log(Player.getGameName())
+const player = new Player()
+player.password = 'asd'
 
 class User {
   public email: string
