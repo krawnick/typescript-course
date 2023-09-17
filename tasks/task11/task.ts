@@ -50,44 +50,58 @@ class ArrayQueue<T> implements Queue<T> {
 // Класс Stack содержит другие методы, так что ничего имплементировать не нужно
 // Класс может работать с любым типом данных, то есть помещать любые данные в массив и содержит массив любого типа  <-- Важно
 
-// class Stack {
-//   // Создать приватное свойство stack, которое по умолчанию массив и содержит массив любого типа
-//   // Создать приватное свойство limit, которое будет типом number
+class Stack<T> {
+  // Создать приватное свойство stack, которое по умолчанию массив и содержит массив любого типа
+  private stack: T[] = []
+  // Создать приватное свойство limit, которое будет типом number
+  private limit: number
+  // Здесь мы установим лимит на стопку листов.
+  // При переполнении стэка программа зависает, а очень высокая стопка листов падает
+  // Так что лимит всегда должен быть
+  constructor(limit: number = Number.MAX_VALUE) {
+    this.limit = limit
+  }
 
-//   // Здесь мы установим лимит на стопку листов.
-//   // При переполнении стэка программа зависает, а очень высокая стопка листов падает
-//   // Так что лимит всегда должен быть
-//   constructor(limit: number = Number.MAX_VALUE) {
-//     this.limit = limit
-//   }
+  push(this: Stack<T>, value: T) {
+    // Добавляет элемент в стэк
+    // Если стэк переполнен - выбрасывает ошибку (throw new Error)
+    if (this.length() + 1 >= this.limit) {
+      throw new Error('Stack full')
+    } else {
+      this.stack.push(value)
+    }
+  }
 
-//   push(value) {
-//     // Добавляет элемент в стэк
-//     // Если стэк переполнен - выбрасывает ошибку (throw new Error)
-//   }
+  pop(this: Stack<T>): T | undefined {
+    // Удаляет последний элемент массива
+    // Если в стеке пусто - выбрасывает ошибку (throw new Error)
+    // При удалении элемента возвращает его
+    // Простыми словами: вы берете верхний лист в стопке и используете его
+    // Если на столе нет листов - получается ошибка, брать нечего
+    if (this.length() === 0) {
+      throw new Error('Stack empty')
+    } else {
+      return this.stack.pop()
+    }
+  }
 
-//   pop() {
-//     // Удаляет последний элемент массива
-//     // Если в стеке пусто - выбрасывает ошибку (throw new Error)
-//     // При удалении элемента возвращает его
-//     // Простыми словами: вы берете верхний лист в стопке и используете его
-//     // Если на столе нет листов - получается ошибка, брать нечего
-//   }
+  length(this: Stack<T>): number {
+    // Возвращает кол-во элементов в стэке
+    return this.stack.length
+  }
 
-//   length() {
-//     // Возвращает кол-во элементов в стэке
-//   }
+  isEmpty(this: Stack<T>): boolean {
+    // Проверяет стэк на пустоту
+    return this.length() === 0
+  }
 
-//   isEmpty() {
-//     // Проверяет стэк на "пустоту"
-//   }
-
-//   top() {
-//     // Возвращает последний (верхний) элемент стэка, но не удаляет его
-//     // Вы просто читаете, что написано на верхнем листе
-//     // Если стэк пуст - вернется null
-//   }
-// }
+  top(this: Stack<T>): T | null {
+    // Возвращает последний (верхний) элемент стэка, но не удаляет его
+    // Вы просто читаете, что написано на верхнем листе
+    // Если стэк пуст - вернется null
+    return this.length() === 0 ? null : this.stack[this.length() - 1]
+  }
+}
 
 // Для тестов
 
@@ -98,23 +112,23 @@ console.log(arrTest1.peek())
 console.log(arrTest1.dequeue())
 console.log(arrTest1.length())
 
-// const arrTest2 = new ArrayQueue<string>()
-// arrTest2.enqueue('5')
-// arrTest2.enqueue('10')
-// console.log(arrTest2.peek())
-// console.log(arrTest2.dequeue())
-// console.log(arrTest2.length())
+const arrTest2 = new ArrayQueue<string>()
+arrTest2.enqueue('5')
+arrTest2.enqueue('10')
+console.log(arrTest2.peek())
+console.log(arrTest2.dequeue())
+console.log(arrTest2.length())
 
-// const stackTest1 = new Stack<number>(10)
-// stackTest1.push(20)
-// stackTest1.push(50)
-// console.log(stackTest1.top())
-// console.log(stackTest1.pop())
-// console.log(stackTest1.length())
+const stackTest1 = new Stack<number>(10)
+stackTest1.push(20)
+stackTest1.push(50)
+console.log(stackTest1.top())
+console.log(stackTest1.pop())
+console.log(stackTest1.length())
 
-// const stackTest2 = new Stack<string>(10)
-// stackTest2.push('20')
-// stackTest2.push('50')
-// console.log(stackTest2.top())
-// console.log(stackTest2.pop())
-// console.log(stackTest2.length())
+const stackTest2 = new Stack<string>(10)
+stackTest2.push('20')
+stackTest2.push('50')
+console.log(stackTest2.top())
+console.log(stackTest2.pop())
+console.log(stackTest2.length())
