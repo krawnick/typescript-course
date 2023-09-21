@@ -1,4 +1,5 @@
 import 'reflect-metadata'
+
 interface ICuboid {
   width: number
   length: number
@@ -29,6 +30,8 @@ class ShippingContainer implements ICuboid {
     this.length = lenght
     this.height = height
     validate(this, 'width', width)
+    validate(this, 'lenght', width)
+    validate(this, 'height', width)
   }
 
   @fixLastCalc('calcArea')
@@ -42,7 +45,7 @@ class ShippingContainer implements ICuboid {
   }
 }
 
-const container = new ShippingContainer(10, 100, 10)
+const container = new ShippingContainer(10, 100, 7)
 container.width = 0
 container.height = 5
 console.log(container)
@@ -52,6 +55,8 @@ console.log(container.calcVolume())
 console.log(container.lastCalc)
 
 console.log(container.calcVolume())
+
+finalValidate(container)
 
 function createdAt<T extends { new (...args: any[]): {} }>(constructor: T) {
   return class extends constructor {
@@ -155,7 +160,7 @@ function validate(target: any, propertyKey: string, value: any): boolean {
     value < Reflect.getMetadata('isMin', target, propertyKey)
   ) {
     throw new Error(
-      `Минимальное значение ${propertyKey} должно быть ${Reflect.getMetadata(
+      `Минимальное значение ${propertyKey} должно быть больше ${Reflect.getMetadata(
         'isMin',
         target,
         propertyKey
@@ -163,5 +168,26 @@ function validate(target: any, propertyKey: string, value: any): boolean {
     )
   }
 
+  if (
+    Reflect.hasMetadata('isMax', target, propertyKey) &&
+    value > Reflect.getMetadata('isMax', target, propertyKey)
+  ) {
+    throw new Error(
+      `Маскимальное значение ${propertyKey} должно быть меньше ${Reflect.getMetadata(
+        'isMax',
+        target,
+        propertyKey
+      )}`
+    )
+  }
+
   return true
+}
+
+function finalValidate(obj: unknown) {
+  if (obj && typeof obj === 'object' && Array.isArray(obj)) {
+    for (let key in obj) {
+      validate(obj, key, obj[key as keyof typeof obj])
+    }
+  }
 }
