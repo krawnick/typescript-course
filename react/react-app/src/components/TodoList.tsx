@@ -1,5 +1,17 @@
-interface TodoList
+import { TodoItem } from './TodoItem'
 
-export const TodoList = (props): JSX.Element => {
-  return (<div></div>)
+import { ITodo } from '../types/data'
+
+interface ITodoListProps {
+  items: ITodo[]
+}
+
+export const TodoList = (props: ITodoListProps): JSX.Element => {
+  return (
+    <div>
+      {props.items.map((todo) => (
+        <TodoItem key={todo.id} {...todo} />
+      ))}
+    </div>
+  )
 }
