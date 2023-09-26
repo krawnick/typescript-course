@@ -1,14 +1,21 @@
 import { ITodo } from '../types/data'
 
-interface ITodoItem extends ITodo {}
+interface ITodoItem extends ITodo {
+  removeTodo: (id: number) => void
+  toggleTodo: (id: number) => void
+}
 
 export const TodoItem = (props: ITodoItem): JSX.Element => {
-  const { title, completed } = props
+  const { id, title, completed, removeTodo, toggleTodo } = props
   return (
     <div>
-      <input type="checkbox" checked={completed} />
+      <input
+        type="checkbox"
+        checked={completed}
+        onChange={() => toggleTodo(id)}
+      />
       {title}
-      <button onClick={''}>X</button>
+      <button onClick={() => removeTodo(id)}>X</button>
     </div>
   )
 }
