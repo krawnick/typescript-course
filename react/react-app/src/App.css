@@ -1,5 +1,23 @@
-main {
+.App {
   text-align: center;
-  vertical-align: center;
-  line-height: 100vh
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+input:checked + span {
+  text-decoration: line-through;
+}
+
+span:last-child {
+  color: red;
+  cursor: pointer;
 }
