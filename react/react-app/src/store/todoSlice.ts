@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 type Todo = {
-  id: string,
-  title: string,
-  completed: boolean,
+  id: string
+  title: string
+  completed: boolean
 }
 
 type TodosState = {
@@ -11,7 +11,7 @@ type TodosState = {
 }
 
 const initialState: TodosState = {
-  list: []
+  list: [],
 }
 
 const todoSlice = createSlice({
@@ -26,13 +26,10 @@ const todoSlice = createSlice({
       })
     },
     toggleComplete(state, action: PayloadAction<string>) {
-      const toggledTodo = state.list.find(
-        (todo) => todo.id === action.payload
-      )
+      const toggledTodo = state.list.find((todo) => todo.id === action.payload)
       if (toggledTodo) {
         toggledTodo.completed = !toggledTodo.completed
       }
-
     },
     removeTodo(state, action: PayloadAction<string>) {
       state.list = state.list.filter((todo) => todo.id !== action.payload)
