@@ -1,21 +1,18 @@
-import { ITodo } from '../types/data'
+import { useDispatch } from 'react-redux'
+import { toggleComplete, removeTodo } from '../store/todoSlice'
 
-interface ITodoItem extends ITodo {
-  removeTodo: (id: number) => void
-  toggleTodo: (id: number) => void
-}
+export const TodoItem = ({ id, text, completed }) => {
+  const dispatch = useDispatch()
 
-export const TodoItem = (props: ITodoItem): JSX.Element => {
-  const { id, title, completed, removeTodo, toggleTodo } = props
   return (
-    <div>
+    <li>
       <input
         type="checkbox"
         checked={completed}
-        onChange={() => toggleTodo(id)}
+        onChange={() => dispatch(toggleComplete({ id }))}
       />
-      {title}
-      <button onClick={() => removeTodo(id)}>X</button>
-    </div>
+      <span>{text}</span>
+      <span onClick={() => dispatch(removeTodo({ id }))}>&times;</span>
+    </li>
   )
 }
