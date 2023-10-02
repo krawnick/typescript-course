@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useAppDispatch } from './hook'
 
 import { addTodo } from './store/todoSlice'
 import { NewTodoForm } from './components/NewTodoForm'
@@ -9,7 +9,7 @@ import './App.css'
 
 function App() {
   const [text, setText] = useState('')
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const handleAction = () => {
     if (text.trim().length) {

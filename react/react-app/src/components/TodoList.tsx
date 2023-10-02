@@ -3,7 +3,7 @@ import { TodoItem } from './TodoItem'
 import { RootState } from '../store'
 import { ITodo } from '../types/data'
 
-export const TodoList = () => {
+export const TodoList = (): JSX.Element => {
   const todos = useSelector((state: RootState) => state.todos.list)
 
   return (

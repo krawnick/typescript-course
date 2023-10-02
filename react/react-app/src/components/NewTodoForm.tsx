@@ -1,8 +1,18 @@
-export const NewTodoForm = ({ value, updateText, handleAction }) => {
+interface NewTodoFormProps {
+  value: string
+  updateText: (str: string) => void
+  handleAction: () => void
+}
+
+export const NewTodoForm = ({
+  value,
+  updateText,
+  handleAction,
+}: NewTodoFormProps) => {
   return (
     <label>
       <input
-        placeholer="new todo"
+        placeholder="new todo"
         value={value}
         onChange={(e) => updateText(e.target.value)}
       />

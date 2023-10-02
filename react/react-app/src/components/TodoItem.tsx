@@ -2,7 +2,7 @@ import { toggleComplete, removeTodo } from '../store/todoSlice'
 import { useAppDispatch } from '../hook'
 import { ITodo } from '../types/data'
 
-export const TodoItem = ({ id, title, completed }: ITodo) => {
+export const TodoItem = ({ id, title, completed }: ITodo): JSX.Element => {
   const dispatch = useAppDispatch()
 
   return (
