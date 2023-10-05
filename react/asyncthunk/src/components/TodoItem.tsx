@@ -1,4 +1,4 @@
-import { toggleComplete, removeTodo } from '../store/todoSlice'
+import { toggleStatus, deleteTodo } from '../store/todoSlice'
 import { useAppDispatch } from '../hook'
 import { ITodo } from '../types/data'
 
@@ -10,10 +10,12 @@ export const TodoItem = ({ id, title, completed }: ITodo): JSX.Element => {
       <input
         type="checkbox"
         checked={completed}
-        onChange={() => dispatch(toggleComplete(id))}
+        onChange={() => dispatch(toggleStatus(id))}
       />
       <span>{title}</span>
-      <span onClick={() => dispatch(removeTodo(id))}>&times;</span>
+      <span onClick={() => dispatch(deleteTodo(id))}>&times;</span>
     </li>
   )
 }
+
+//

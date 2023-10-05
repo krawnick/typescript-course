@@ -1,4 +1,9 @@
-import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit'
+import {
+  createSlice,
+  PayloadAction,
+  createAsyncThunk,
+  AnyAction,
+} from '@reduxjs/toolkit'
 
 type Todo = {
   id: string
@@ -55,6 +60,25 @@ export const addNewTodo = createAsyncThunk<
 
   const data = (await response.json()) as Todo
   return data
+})
+
+export const deleteTodo = createAsyncThunk<
+  string,
+  string,
+  { rejectValue: string }
+>('todos/deleteTodo', async function (id, { rejectWithValue }) {
+  const response = await fetch(
+    `https://jsonplaceholder.typicode.com/todos/${id}`,
+    {
+      method: 'DELETE',
+    }
+  )
+
+  if (!response.ok) {
+    return rejectWithValue("Can't delete task. Server error.")
+  }
+
+  return id
 })
 
 // export const toggleStatus = createAsyncThunk<Todo, string, {rejectWithValue: string, state: {todos: TodosState}}>(
@@ -130,9 +154,19 @@ const todoSlice = createSlice({
       .addCase(addNewTodo.fulfilled, (state, action) => {
         state.list.push(action.payload)
       })
+      .addCase(deleteTodo.fulfilled, (state, action) => {
+        state.list = state.list.filter((todo) => todo.id !== action.payload)
+      })
+      .addMatcher(isError, (state, action: PayloadAction<string>) => {
+        state.error = action.payload
+        state.loading = false
+      })
   },
 })
 
+function isError(action: AnyAction) {
+  return action.type.endsWith('rejected')
+}
 // export const { addTodo, toggleComplete, removeTodo } = todoSlice.actions
 
 export default todoSlice.reducer
