@@ -1,35 +1,82 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { ReactChild, ReactNode } from 'react'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+interface BoxProps {
+  children: ReactNode
+  className: string
+}
 
+const Box = ({ children, className }: BoxProps): JSX.Element => {
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div
+      style={{
+        padding: '20px',
+        marginBottom: '20px',
+        border: '1px solid peru',
+      }}
+      className={className}
+    >
+      {children}
+    </div>
   )
 }
 
-export default App
+interface SpecialBoxProps {
+  children: ReactChild
+  className: string
+}
+
+const SpecialBox = ({ children, className }: SpecialBoxProps): JSX.Element => {
+  return (
+    <div
+      style={{
+        padding: '20px',
+        marginBottom: '20px',
+        border: '1px solid peru',
+      }}
+      className={className}
+    >
+      {children}
+    </div>
+  )
+}
+
+interface StringBoxProps {
+  children: string
+  className: string
+}
+
+const StringBox = ({ children, className }: StringBoxProps): JSX.Element => {
+  return (
+    <div
+      style={{
+        padding: '20px',
+        marginBottom: '20px',
+        border: '1px solid peru',
+      }}
+      className={className}
+    >
+      {children}
+    </div>
+  )
+}
+
+export const App = () => {
+  return (
+    <div>
+      <Box className="box">
+        {Box.name}
+        <p>Hello</p>
+        <p>How are you?</p>
+      </Box>
+      <SpecialBox className="special-box">
+        <div>
+          {SpecialBox.name}
+          <p>Hello</p>
+          <p>How are you?</p>
+        </div>
+      </SpecialBox>
+      <StringBox className="string-box">It's okay!</StringBox>
+    </div>
+  )
+}
